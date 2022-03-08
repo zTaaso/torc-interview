@@ -5,15 +5,20 @@ export const Container = styled.div`
   flex-direction: column;
 
   flex: 1;
-  border: 1px solid black;
   margin: 10px 15px;
+
+  button {
+    padding: 5px 0;
+    cursor: pointer;
+  }
 `;
 
 export const Header = styled.header`
   display: flex;
-  flex: 1;
   justify-content: center;
   align-items: center;
+
+  border: 1px solid black;
 
   padding: 5px 15px;
 `;

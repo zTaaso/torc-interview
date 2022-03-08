@@ -1,5 +1,7 @@
 import React from 'react';
 import { BoardContext } from '../../context/BoardItems';
+import BoardType from '../../Types/BoardType';
+import TaskItemType from '../../Types/TaskItemType';
 
 import ItemsList from '../ItemsList';
 import TodoItem from '../TodoItem';
@@ -7,7 +9,8 @@ import TodoItem from '../TodoItem';
 import * as S from './styles';
 
 interface BoardTypes {
-  title: string;
+  board: BoardType;
+  boardIndex: number;
 }
 
 const defaultTasks = [
@@ -16,27 +19,30 @@ const defaultTasks = [
   { name: 'Buy vegi' },
 ];
 
-const Board: React.FC<BoardTypes> = ({ title }) => {
+const Board: React.FC<BoardTypes> = ({ board, boardIndex }) => {
   const context = React.useContext(BoardContext);
 
-  const [tasks, setTasks] = React.useState(defaultTasks);
+  const [, setTasks] = React.useState([] as TaskItemType[]);
 
   const handleAddTask = () => {
     const newTask = prompt('Name of the task:');
 
     if (!newTask) return;
 
-    setTasks((prevTasks) => [...prevTasks, { name: newTask }]);
+    context.handleTaskAdding(boardIndex, { name: newTask });
   };
 
-  React.useEffect(() => {}, [tasks]);
+  React.useEffect(() => {
+    // this is intended to force a rerender and update correctly the tasks
+    setTasks(board.tasks);
+  }, [context.boards]);
 
   return (
     <S.Container>
-      <S.Header>{title}</S.Header>
+      <S.Header>{board.name}</S.Header>
       <ItemsList>
-        {tasks.map((item) => (
-          <TodoItem item={item} />
+        {board.tasks.map((item, i) => (
+          <TodoItem item={item} boardIndex={boardIndex} taskIndex={i} key={i} />
         ))}
       </ItemsList>
 

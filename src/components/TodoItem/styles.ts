@@ -5,7 +5,9 @@ export const Container = styled.div`
   justify-content: center;
   align-items: center;
 
-  padding: 5px 15px;
+  padding: 0px 10px;
+
+  border: 1px solid black;
 
   span {
     display: flex;
@@ -15,14 +17,17 @@ export const Container = styled.div`
   }
 `;
 
-export const ArrowButton = styled.div`
+export const ArrowButton = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
 
   padding: 5px;
 
-  cursor: pointer;
   font-size: 1.5rem;
   font-weight: bold;
+
+  outline: none;
+  border: 0;
+  background-color: white;
 `;

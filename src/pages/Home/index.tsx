@@ -1,16 +1,18 @@
 import React from 'react';
 
 import Board from '../../components/Board';
+import { BoardContext } from '../../context/BoardItems';
 
 import * as S from './styles';
 
 function Home() {
+  const { boards } = React.useContext(BoardContext);
+
   return (
     <S.Container>
-      <Board title="Winnie" />
-      <Board title="Brad" />
-      <Board title="Bob" />
-      <Board title="Thomas" />
+      {boards.map((board, i) => (
+        <Board board={board} boardIndex={i} key={i} />
+      ))}
     </S.Container>
   );
 }
